@@ -14,11 +14,47 @@
 
 <th:block th:replace="sample/layouts/navbar :: header"/>
 
-<br><br>
+<br>
+<!-- #################### Flash Message Start #################### -->
+<th:block
+        th:replace="sample/layouts/flash-message :: flash-message"
+/>
+<!-- #################### Flash Message End #################### -->
+<br>
 <th:block th:replace="sample/layouts/modals/modal-create-card :: modal-create"/>
 <div class="container">
     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">Crete Card</button>
+
+    <br><br>
+
+    <div class="row">
+        <span th:each="item : ${items}">
+            <div class="col-lg-3 col-md-2 col-sm-12">
+                <div class="card" style="width: 320px; height: 210px">
+                    <!--<img class="card-img-top" src="..." alt="Card image cap">-->
+                    <div class="card-body">
+                        <h5 class="card-title"><span th:text="${item.name}"> Name </span></h5>
+                        <p class="card-text">Effect: <span th:text="${item.effect}"> Effect </span></p>
+                        <p class="card-text">Point: <span th:text="${item.point}"> Point </span></p>
+
+                        <button type="button" class="btn btn-warning" data-toggle="modal" th:data-target="'#editModal_'+${item.id}">Edit</button>
+                        <th:block th:replace="sample/layouts/modals/modal-edit-card :: modal-edit(id=${item.id}, item=${item})"/>
+
+                        <button type="button" class="btn btn-danger" data-toggle="modal" th:data-target="'#delModal_'+${item.id}">Delete</button>
+                        <th:block th:replace="sample/layouts/modals/modal-delete-card :: modal-delete(id=${item.id}, name=${item.name})"/>
+                    </div>
+                </div>
+            </div>
+        </span>
+    </div>
+
+
+
 </div>
+
+<!-- #################### Pagination Start #################### -->
+<th:block th:replace="sample/layouts/pagination :: pagination"/>
+<!-- #################### Pagination End #################### -->
 
 </body>
 </html>

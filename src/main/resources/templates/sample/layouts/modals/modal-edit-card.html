@@ -1,49 +1,53 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <body>
-<th:block th:fragment="modal-create">
+<th:block th:fragment="modal-edit">
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" th:id="'editModal_'+${id}" tabindex="-1" role="dialog" th:aria-labelledby="'editModal_'+${id}+'_label'" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Create New Card</h5>
+                    <h5 class="modal-title" th:id="'editModal_'+${id}+'_label'">Edit Card</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
 
                 <div class="modal-body">
-                    <form role="form" method="POST" action="/card/create">
+                    <form role="form" method="POST" th:action="@{'/card/' + ${id} }">
+                        <input type="hidden" name="_method" value="PUT" />
                         <input type="hidden" name="_token" value="">
                         <div class="form-group">
                             <label class="control-label">Name</label>
                             <div>
-                                <input type="text" class="form-control input-lg" name="name">
+                                <input type="text" class="form-control input-lg" name="name"
+                                       th:value="${item.name}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Effect</label>
                             <div>
-                                <input type="text" class="form-control input-lg" name="effect">
+                                <input type="text" class="form-control input-lg" name="effect"
+                                       th:value="${item.effect}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Point</label>
                             <div>
-                                <input type="number" class="form-control input-lg" name="point">
+                                <input type="number" class="form-control input-lg" name="point"
+                                       th:value="${item.point}">
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label">Image</label>
                             <div>
-                                <input type="text" class="form-control input-lg" name="image">
+                                <input type="text" class="form-control input-lg" name="image"
+                                       th:value="${item.image}">
                             </div>
                         </div>
                         <div class="form-group">
                             <div>
-                                <button type="submit" class="btn btn-success">Create</button>
+                                <button type="submit" class="btn btn-warning">Edit</button>
                             </div>
                         </div>
                     </form>

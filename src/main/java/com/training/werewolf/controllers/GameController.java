@@ -14,9 +14,6 @@ public class GameController {
     public String index() throws Exception {
         return "sample/index";
     }
-    @GetMapping(value = "cards")
-    public String showCards() throws Exception {
-        return "sample/card";
-    }
+
 }
 

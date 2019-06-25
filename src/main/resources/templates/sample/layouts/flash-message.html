@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<body>
+
+<th:block th:fragment="flash-message">
+
+    <div th:if="${success != null}" class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong th:text="${success}">Success</strong>
+    </div>
+
+</th:block>
+
+</body>
+</html>
